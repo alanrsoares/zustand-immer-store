@@ -1,6 +1,6 @@
 # Zustand Immer Store
 
-A ~268B library to create type-safe redux-style stores with Zustand and Immer
+A ~268B library to create type-safe redux-style stores with [Zustand](https://github.com/pmndrs/zustand) and [Immer](https://github.com/immerjs/immer)
 
 
 # Installation
