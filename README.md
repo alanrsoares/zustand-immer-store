@@ -33,7 +33,7 @@ export default useCounterStore = createStore({ counter: 0 }, (set, get) => ({
 import useCounterStore from "./counter-store"
 
 export default function App() {
-    const { state, actions, state } = useCounterStore()
+    const { state, actions } = useCounterStore()
     return (
         <main>
             <div>
