@@ -1,4 +1,4 @@
-yarn tsc src/index.ts \
+yarn tsc src/zustand-immer-store.ts \
  --declaration \
  --emitDeclarationOnly \
  --jsx preserve \
