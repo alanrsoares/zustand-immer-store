@@ -33,12 +33,12 @@ export default useCounterStore = createStore({ counter: 0 }, (set, get) => ({
 import useCounterStore from "./counter-store"
 
 export default function App() {
-    const { state, actions } = useCounterStore()
+    const { state, actions, state } = useCounterStore()
     return (
         <main>
             <div>
                 <button onClick={actions.decrement}> - </button>
-                 <div>{count}</div>
+                 <div>{state.count}</div>
                 <button onClick={actions.increment}> + </button>
             </div>
         </main>
