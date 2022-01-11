@@ -2,7 +2,7 @@
   "name": "zustand-immer-store",
   "author": "Alan Soares <alanrsoars@gmail.com> (https://github.com/alanrsoares)",
   "version": "0.1.1",
-  "license": "MIT-0",
+  "license": "SEE LICENSE IN LICENSE.md",
   "files": [
     "dist/*"
   ],
