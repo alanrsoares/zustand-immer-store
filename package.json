@@ -49,9 +49,6 @@
   },
   "jest": {
     "preset": "vite-jest",
-    "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest-setup.ts"
-    ]
+    "testEnvironment": "jsdom"
   }
 }
