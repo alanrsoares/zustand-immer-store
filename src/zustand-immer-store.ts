@@ -2,6 +2,8 @@ import produce, { Draft } from "immer";
 import { WritableDraft } from "immer/dist/internal";
 import create, { GetState, State, StateCreator } from "zustand";
 
+export { default as shallow } from "zustand/shallow";
+
 export type Action<T = any> = (() => void) | ((payload: T) => void);
 
 export type Store<T, A extends Record<string, Action<any>> = {}> = {
