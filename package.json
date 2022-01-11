@@ -42,6 +42,19 @@
     "immer": "^9.0.0",
     "zustand": "^3.6.5"
   },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-typescript"
+    ]
+  },
   "jest": {
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
