@@ -1,24 +1,24 @@
-import { renderHook, act } from '@testing-library/react-hooks/dom';
-import { createStore } from './zustand-immer-store';
+import { renderHook } from "@testing-library/react-hooks/dom";
+import { createStore } from "./zustand-immer-store";
 
-describe('creates a store and api object', () => {
+describe("creates a store and api object", () => {
   let store = setup();
 
-  it('returns counter value', () => {
+  it("returns counter value", () => {
     expect(store.actions.getCounter()).toBe(0);
   });
 
-  it('increment counter value', () => {
+  it("increment counter value", () => {
     store.actions.incrementCounter();
     expect(store.actions.getCounter()).toBe(1);
   });
 
-  it('decrement counter value', () => {
+  it("decrement counter value", () => {
     store.actions.decrementCounter();
     expect(store.actions.getCounter()).toBe(0);
   });
 
-  it('set counter value', () => {
+  it("set counter value", () => {
     store.actions.setCounter(150);
     expect(store.actions.getCounter()).toBe(150);
   });
