@@ -1,7 +1,7 @@
 {
   "name": "zustand-immer-store",
   "author": "Alan Soares <alanrsoars@gmail.com> (https://github.com/alanrsoares)",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "SEE LICENSE IN LICENSE.md",
   "files": [
     "dist/*"
