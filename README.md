@@ -1,6 +1,6 @@
 # Zustand Immer Store
 
-A utility library to create type-safe redux-style stores with Zustand and Immer
+A ~268B library to create type-safe redux-style stores with Zustand and Immer
 
 
 # Installation

@@ -1,6 +1,14 @@
 {
   "name": "zustand-immer-store",
+  "description": "A ~268B library to create type-safe redux-style stores with Zustand and Immer",
   "author": "Alan Soares <alanrsoars@gmail.com> (https://github.com/alanrsoares)",
+  "keywords": [
+    "state-management",
+    "zustand",
+    "typescript",
+    "immer",
+    "redux"
+  ],
   "version": "0.1.2",
   "license": "SEE LICENSE IN LICENSE.md",
   "files": [
