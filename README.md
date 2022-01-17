@@ -5,6 +5,8 @@
 
 A ~268B library to create type-safe redux-style stores with [Zustand](https://github.com/pmndrs/zustand) and [Immer](https://github.com/immerjs/immer)
 
+[Live demo on codesandbox](https://codesandbox.io/s/zustand-immer-store-demo-q5xqi)
+
 # Installation
 
 ```bash
