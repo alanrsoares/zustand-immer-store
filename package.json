@@ -9,7 +9,7 @@
     "immer",
     "redux"
   ],
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "SEE LICENSE IN LICENSE.md",
   "files": [
     "dist/*"
