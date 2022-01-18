@@ -20,6 +20,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "prepare": "yarn build",
+    "prebuild": "yarn test",
     "postbuild": "./scripts/postbuild.sh",
     "postinstall": "yarn simple-git-hooks",
     "serve": "vite preview",
