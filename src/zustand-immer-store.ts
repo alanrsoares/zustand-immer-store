@@ -69,7 +69,7 @@ export function createStore<
     selectors: TSelectors;
   }
 ) {
-  const useStore = create<Store<TState, TActions>>(
+  const useStore = create<Store<TState, TActions, TSelectors>>(
     immerMiddleware((set, get) => ({
       state: state,
       actions: config.createActions(set, get),

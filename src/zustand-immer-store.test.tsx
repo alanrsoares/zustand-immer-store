@@ -23,6 +23,10 @@ describe("creates a store and api object", () => {
     store.actions.setCounter(150);
     expect(store.actions.getCounter()).toBe(150);
   });
+
+  it("select isOdd", () => {
+    expect(store.selectors.isOdd(store.state)).toBe(false);
+  });
 });
 
 function setup() {
