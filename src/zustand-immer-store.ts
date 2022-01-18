@@ -7,6 +7,8 @@ export { default as shallow } from "zustand/shallow";
 export type Selector<S, R = any> = (state: S) => R;
 export type Action<T = any> = (() => void) | ((payload: T) => void);
 
+export type DefaultSelectors<S> = { [K in keyof S]: Selector<S> };
+
 export type Store<
   T,
   A extends Record<string, Action<any>> = {},
@@ -61,21 +63,38 @@ export function createStore<
   TSelectors extends Record<string, Selector<TState>>
 >(
   state: TState,
-  config: {
-    createActions: (
+  config?: {
+    createActions?: (
       set: SetState<Store<TState, any>>,
       get: GetState<Store<TState, any>>
     ) => TActions;
-    selectors: TSelectors;
+    selectors?: TSelectors;
   }
 ) {
-  const useStore = create<Store<TState, TActions, TSelectors>>(
+  const useStore = create<
+    Store<TState, TActions, TSelectors & DefaultSelectors<TState>>
+  >(
     immerMiddleware((set, get) => ({
-      state: state,
-      actions: config.createActions(set, get),
-      selectors: config.selectors,
+      state,
+      actions: config?.createActions
+        ? config.createActions(set, get)
+        : ({} as TActions),
+      selectors: {
+        ...(config?.selectors ? config.selectors : ({} as TSelectors)),
+        ...createDefaultSelectors(state),
+      },
     }))
   );
 
   return useStore;
+}
+
+export function createDefaultSelectors<T extends {}>(state: T) {
+  return Object.keys(state).reduce(
+    (acc, key) => ({
+      ...acc,
+      [key]: (state: T) => state[key as keyof T],
+    }),
+    {} as DefaultSelectors<T>
+  );
 }
