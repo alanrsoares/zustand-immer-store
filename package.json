@@ -26,10 +26,6 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "dependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
-  },
   "devDependencies": {
     "@testing-library/react-hooks": "7.0.2",
     "@types/node": "17.0.8",
@@ -41,6 +37,8 @@
     "immer": "9.0.12",
     "nano-staged": "0.5.0",
     "prettier": "2.5.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "simple-git-hooks": "2.7.0",
     "typescript": "4.5.4",
     "vite": "2.7.12",
