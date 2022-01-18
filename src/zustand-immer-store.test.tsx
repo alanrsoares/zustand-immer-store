@@ -73,7 +73,7 @@ describe("creates a store and api object", () => {
 });
 
 function setup() {
-  let { result } = renderHook(() => {
+  const { result } = renderHook(() => {
     return useCounterStore();
   });
   return result.current;

@@ -9,16 +9,17 @@ export type Action<T = any> = (() => void) | ((payload: T) => void);
 
 export type DefaultSelectors<S> = { [K in keyof S]: Selector<S> };
 
-export type Store<T extends {}, A extends Record<string, Action<any>> = {}> = {
+export type Store<
+  T extends Record<string, unknown>,
+  A extends Record<string, Action<any>> = Record<string, Action<any>>
+> = {
   state: T;
   actions: A;
   get: GetState<Store<T, A>>;
   set: SetState<Store<T, A>>;
 };
 
-export type SetState<T extends State> = (
-  set: (draft: WritableDraft<T>) => void
-) => void;
+export type SetState<T extends State> = (set: (draft: WritableDraft<T>) => void) => void;
 
 /**
  * Immer produce middleware for zustand stores
@@ -57,7 +58,7 @@ const immerMiddleware =
  * });
  */
 export function createStore<
-  TState extends {},
+  TState extends Record<string, unknown>,
   TActions extends Record<string, Action>,
   TSelectors extends Record<string, Selector<TState>>
 >(
@@ -73,9 +74,7 @@ export function createStore<
   const useStore = create<Store<TState, TActions>>(
     immerMiddleware((set, get) => ({
       state,
-      actions: config?.createActions
-        ? config.createActions(set, get)
-        : ({} as TActions),
+      actions: config?.createActions ? config.createActions(set, get) : ({} as TActions),
       selectors: {
         ...(config?.selectors ? config.selectors : ({} as TSelectors)),
         ...createDefaultSelectors(state),
@@ -96,7 +95,7 @@ export function createStore<
   return useStore as UseBoundStoreExtended;
 }
 
-export function createDefaultSelectors<T extends {}>(state: T) {
+export function createDefaultSelectors<T extends Record<string, unknown>>(state: T) {
   return Object.keys(state).reduce(
     (acc, key) => ({
       ...acc,

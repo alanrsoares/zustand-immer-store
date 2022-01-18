@@ -26,15 +26,23 @@
     "postinstall": "yarn simple-git-hooks",
     "serve": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "code:types": "tsc --noEmit",
+    "code:format": "prettier --write '**/*.{ts,tsx,md}'",
+    "code:lint": "eslint '**/*.{ts,tsx}' --fix"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "7.0.2",
     "@types/node": "17.0.8",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "5.10.0",
+    "@typescript-eslint/parser": "5.10.0",
     "@vitejs/plugin-react": "1.1.4",
     "c8": "7.11.0",
+    "eslint": "8.7.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-react": "7.28.0",
     "happy-dom": "2.27.0",
     "immer": "9.0.12",
     "nano-staged": "0.5.0",
@@ -52,9 +60,14 @@
     "zustand": "^3.6.5"
   },
   "nano-staged": {
-    "*.{ts,tsx,md}": "prettier --write"
+    "*.{ts,tsx,md}": "prettier --write",
+    "*.{ts,tsx}": "eslint --fix"
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": false
   }
 }
