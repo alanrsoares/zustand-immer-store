@@ -44,18 +44,20 @@ const immerMiddleware =
  *
  * @example
  *
- * const useNameStore = createStore({ name: "Anonymous" }, (set) => ({
- *   setName(name: string) {
- *     set((store) => {
- *       store.state.name = name;
- *     });
- *   },
- *   setDefaultName() {
- *     set((store) => {
- *       store.state.name = "Anonymous";
- *     });
- *   },
- * }));
+ * const useNameStore = createStore({ name: "Anonymous" }, {
+ *   createActions: (set) => ({
+ *     setName(name: string) {
+ *       set((store) => {
+ *         store.state.name = name;
+ *       });
+ *     },
+ *     setDefaultName() {
+ *       set((store) => {
+ *         store.state.name = "Anonymous";
+ *       });
+ *     },
+ *   })
+ * });
  */
 export function createStore<
   TState extends {},
