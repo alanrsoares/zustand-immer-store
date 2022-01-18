@@ -14,9 +14,10 @@
   "files": [
     "dist/*"
   ],
-  "typings": "dist/zustand-immer-store.d.ts",
-  "module": "dist/zustand-immer-store.es.js",
-  "umd:main": "dist/zustand-immer-store.umd.js",
+  "typings": "./dist/zustand-immer-store.d.ts",
+  "types": "./dist/zustand-immer-store.d.ts",
+  "module": "./dist/zustand-immer-store.es.js",
+  "umd:main": "./dist/zustand-immer-store.umd.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
