@@ -45,6 +45,9 @@ function setup() {
               draft.state.counter = value;
             }),
         }),
+        selectors: {
+          isOdd: (s) => s.counter % 2 !== 0,
+        },
       }
     );
     return store();

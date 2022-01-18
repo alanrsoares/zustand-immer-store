@@ -4,11 +4,17 @@ import create, { GetState, State, StateCreator } from "zustand";
 
 export { default as shallow } from "zustand/shallow";
 
+export type Selector<S, R = any> = (state: S) => R;
 export type Action<T = any> = (() => void) | ((payload: T) => void);
 
-export type Store<T, A extends Record<string, Action<any>> = {}> = {
+export type Store<
+  T,
+  A extends Record<string, Action<any>> = {},
+  S extends Record<string, (state: T) => any> = {}
+> = {
   state: T;
   actions: A;
+  selectors: S;
 };
 
 export type SetState<T extends State> = (
@@ -51,7 +57,8 @@ const immerMiddleware =
  */
 export function createStore<
   TState extends {},
-  TActions extends Record<string, Action>
+  TActions extends Record<string, Action>,
+  TSelectors extends Record<string, Selector<TState>>
 >(
   state: TState,
   config: {
@@ -59,12 +66,14 @@ export function createStore<
       set: SetState<Store<TState, any>>,
       get: GetState<Store<TState, any>>
     ) => TActions;
+    selectors: TSelectors;
   }
 ) {
   const useStore = create<Store<TState, TActions>>(
     immerMiddleware((set, get) => ({
       state: state,
       actions: config.createActions(set, get),
+      selectors: config.selectors,
     }))
   );
 
