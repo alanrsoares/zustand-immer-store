@@ -40,6 +40,7 @@ const useCounterStore = createStore(
 
 describe("creates a store and api object", () => {
   const store = setup();
+  const { selectors } = useCounterStore;
 
   it("returns counter value", () => {
     expect(store.actions.getCounter()).toBe(1);
@@ -61,13 +62,13 @@ describe("creates a store and api object", () => {
   });
 
   it("select isOdd value", () => {
-    const result = useCounterStore.selectors?.isOdd(store.get().state);
+    const result = selectors?.isOdd(store.get().state);
     expect(result).toBe(false);
   });
 
   it("select isEven value", () => {
     store.actions.setCounter(33);
-    const result = useCounterStore.selectors?.isEven(store.get().state);
+    const result = selectors?.isEven(store.get().state);
     expect(result).toBe(false);
   });
 });
