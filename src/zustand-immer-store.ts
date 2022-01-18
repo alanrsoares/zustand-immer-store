@@ -54,15 +54,17 @@ export function createStore<
   TActions extends Record<string, Action>
 >(
   state: TState,
-  createActions: (
-    set: SetState<Store<TState, any>>,
-    get: GetState<Store<TState, any>>
-  ) => TActions
+  config: {
+    createActions: (
+      set: SetState<Store<TState, any>>,
+      get: GetState<Store<TState, any>>
+    ) => TActions;
+  }
 ) {
   const useStore = create<Store<TState, TActions>>(
     immerMiddleware((set, get) => ({
       state: state,
-      actions: createActions(set, get),
+      actions: config.createActions(set, get),
     }))
   );
 

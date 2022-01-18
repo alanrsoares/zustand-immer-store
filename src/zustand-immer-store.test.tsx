@@ -27,21 +27,26 @@ describe("creates a store and api object", () => {
 
 function setup() {
   let { result } = renderHook(() => {
-    let store = createStore({ counter: 0 }, (set, get) => ({
-      getCounter: () => get().state.counter,
-      incrementCounter: () =>
-        set((draft) => {
-          draft.state.counter++;
+    let store = createStore(
+      { counter: 0 },
+      {
+        createActions: (set, get) => ({
+          getCounter: () => get().state.counter,
+          incrementCounter: () =>
+            set((draft) => {
+              draft.state.counter++;
+            }),
+          decrementCounter: () =>
+            set((draft) => {
+              draft.state.counter--;
+            }),
+          setCounter: (value: number) =>
+            set((draft) => {
+              draft.state.counter = value;
+            }),
         }),
-      decrementCounter: () =>
-        set((draft) => {
-          draft.state.counter--;
-        }),
-      setCounter: (value: number) =>
-        set((draft) => {
-          draft.state.counter = value;
-        }),
-    }));
+      }
+    );
     return store();
   });
   return result.current;
