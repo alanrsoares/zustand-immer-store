@@ -19,16 +19,21 @@ yarn add zustand-immer-store
 // counter-store.ts
 import { createStore } from "zustand-immer-store";
 
-const useCounterStore = createStore({ counter: 0 }, (set) => ({
-  increment: () =>
-    set((draft) => {
-      draft.state.counter++;
+const useCounterStore = createStore(
+  { counter: 0 },
+  {
+    createActions: (set) => ({
+      increment: () =>
+        set((draft) => {
+          draft.state.counter++;
+        }),
+      decrement: () =>
+        set((draft) => {
+          draft.state.counter--;
+        }),
     }),
-  decrement: () =>
-    set((draft) => {
-      draft.state.counter--;
-    }),
-}));
+  }
+);
 
 export default useCounterStore;
 ```
