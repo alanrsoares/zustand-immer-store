@@ -17,7 +17,7 @@ yarn add zustand-immer-store
 
 ```tsx
 // counter-store.ts
-import { createStore } from "zustand-immer-store";
+import { createStore } from 'zustand-immer-store';
 
 const useCounterStore = createStore(
   { counter: 0 },
@@ -40,7 +40,7 @@ export default useCounterStore;
 
 ```tsx
 // App.tsx
-import useCounterStore from "./counter-store";
+import useCounterStore from './counter-store';
 
 export default function App() {
   const { state, actions } = useCounterStore();

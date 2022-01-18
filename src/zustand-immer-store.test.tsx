@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { renderHook } from "@testing-library/react-hooks/dom";
+import { describe, it, expect } from 'vitest';
+import { renderHook } from '@testing-library/react-hooks/dom';
 
-import { createStore } from "./zustand-immer-store";
+import { createStore } from './zustand-immer-store';
 
 const useCounterStore = createStore(
   { counter: 1, step: 1 },
@@ -38,34 +38,34 @@ const useCounterStore = createStore(
   }
 );
 
-describe("creates a store and api object", () => {
+describe('creates a store and api object', () => {
   const store = setup();
 
-  it("returns counter value", () => {
+  it('returns counter value', () => {
     expect(store.actions.getCounter()).toBe(1);
   });
 
-  it("increment counter value", () => {
+  it('increment counter value', () => {
     store.actions.incrementCounter();
     expect(store.actions.getCounter()).toBe(2);
   });
 
-  it("decrement counter value", () => {
+  it('decrement counter value', () => {
     store.actions.decrementCounter();
     expect(store.actions.getCounter()).toBe(1);
   });
 
-  it("set counter value", () => {
+  it('set counter value', () => {
     store.actions.setCounter(150);
     expect(store.actions.getCounter()).toBe(150);
   });
 
-  it("select isOdd value", () => {
+  it('select isOdd value', () => {
     const result = useCounterStore.selectors?.isOdd(store.get().state);
     expect(result).toBe(false);
   });
 
-  it("select isEven value", () => {
+  it('select isEven value', () => {
     store.actions.setCounter(33);
     const result = useCounterStore.selectors?.isEven(store.get().state);
     expect(result).toBe(false);
@@ -73,7 +73,7 @@ describe("creates a store and api object", () => {
 });
 
 function setup() {
-  let { result } = renderHook(() => {
+  const { result } = renderHook(() => {
     return useCounterStore();
   });
   return result.current;
