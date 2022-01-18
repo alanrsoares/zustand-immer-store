@@ -9,14 +9,11 @@ export type Action<T = any> = (() => void) | ((payload: T) => void);
 
 export type DefaultSelectors<S> = { [K in keyof S]: Selector<S> };
 
-export type Store<
-  T,
-  A extends Record<string, Action<any>> = {},
-  S extends Record<string, (state: T) => any> = {}
-> = {
+export type Store<T extends {}, A extends Record<string, Action<any>> = {}> = {
   state: T;
   actions: A;
-  selectors: S;
+  get: GetState<Store<T, A>>;
+  set: SetState<Store<T, A>>;
 };
 
 export type SetState<T extends State> = (
@@ -73,9 +70,7 @@ export function createStore<
     selectors?: TSelectors;
   }
 ) {
-  const useStore = create<
-    Store<TState, TActions, TSelectors & DefaultSelectors<TState>>
-  >(
+  const useStore = create<Store<TState, TActions>>(
     immerMiddleware((set, get) => ({
       state,
       actions: config?.createActions
@@ -85,10 +80,20 @@ export function createStore<
         ...(config?.selectors ? config.selectors : ({} as TSelectors)),
         ...createDefaultSelectors(state),
       },
+      get: get as GetState<Store<TState, TActions>>,
+      set,
     }))
   );
 
-  return useStore;
+  type UseBoundStoreExtended = typeof useStore & {
+    selectors?: TSelectors;
+  };
+
+  (useStore as UseBoundStoreExtended).selectors = config?.selectors
+    ? config.selectors
+    : ({} as TSelectors);
+
+  return useStore as UseBoundStoreExtended;
 }
 
 export function createDefaultSelectors<T extends {}>(state: T) {
