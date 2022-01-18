@@ -27,6 +27,7 @@
     "serve": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "code:types": "tsc --noEmit",
     "code:format": "prettier --write '**/*.{ts,tsx,md}'",
     "code:lint": "eslint '**/*.{ts,tsx}' --fix"
   },
@@ -66,7 +67,7 @@
     "pre-commit": "./node_modules/.bin/nano-staged"
   },
   "prettier": {
-    "printWidth": 120,
-    "singleQuote": true
+    "printWidth": 100,
+    "singleQuote": false
   }
 }

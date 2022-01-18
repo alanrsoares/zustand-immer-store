@@ -1,15 +1,18 @@
-import produce, { Draft } from 'immer';
-import { WritableDraft } from 'immer/dist/internal';
-import create, { GetState, State, StateCreator } from 'zustand';
+import produce, { Draft } from "immer";
+import { WritableDraft } from "immer/dist/internal";
+import create, { GetState, State, StateCreator } from "zustand";
 
-export { default as shallow } from 'zustand/shallow';
+export { default as shallow } from "zustand/shallow";
 
 export type Selector<S, R = any> = (state: S) => R;
 export type Action<T = any> = (() => void) | ((payload: T) => void);
 
 export type DefaultSelectors<S> = { [K in keyof S]: Selector<S> };
 
-export type Store<T extends {}, A extends Record<string, Action<any>> = {}> = {
+export type Store<
+  T extends Record<string, unknown>,
+  A extends Record<string, Action<any>> = Record<string, Action<any>>
+> = {
   state: T;
   actions: A;
   get: GetState<Store<T, A>>;
@@ -25,7 +28,9 @@ export type SetState<T extends State> = (set: (draft: WritableDraft<T>) => void)
  * @returns
  */
 const immerMiddleware =
-  <T extends State>(createState: StateCreator<T, (fn: (draft: Draft<T>) => void) => void>): StateCreator<T> =>
+  <T extends State>(
+    createState: StateCreator<T, (fn: (draft: Draft<T>) => void) => void>
+  ): StateCreator<T> =>
   (set, get, api) =>
     createState((fn) => set(produce<T>(fn)), get, api);
 
@@ -53,13 +58,16 @@ const immerMiddleware =
  * });
  */
 export function createStore<
-  TState extends {},
+  TState extends Record<string, unknown>,
   TActions extends Record<string, Action>,
   TSelectors extends Record<string, Selector<TState>>
 >(
   state: TState,
   config?: {
-    createActions?: (set: SetState<Store<TState, any>>, get: GetState<Store<TState, any>>) => TActions;
+    createActions?: (
+      set: SetState<Store<TState, any>>,
+      get: GetState<Store<TState, any>>
+    ) => TActions;
     selectors?: TSelectors;
   }
 ) {
@@ -80,12 +88,14 @@ export function createStore<
     selectors?: TSelectors;
   };
 
-  (useStore as UseBoundStoreExtended).selectors = config?.selectors ? config.selectors : ({} as TSelectors);
+  (useStore as UseBoundStoreExtended).selectors = config?.selectors
+    ? config.selectors
+    : ({} as TSelectors);
 
   return useStore as UseBoundStoreExtended;
 }
 
-export function createDefaultSelectors<T extends {}>(state: T) {
+export function createDefaultSelectors<T extends Record<string, unknown>>(state: T) {
   return Object.keys(state).reduce(
     (acc, key) => ({
       ...acc,
