@@ -14,10 +14,10 @@
   "files": [
     "dist/*"
   ],
-  "typings": "./dist/index.d.ts",
-  "types": "./dist/index.d.ts",
-  "module": "./dist/index.es.js",
-  "main": "./dist/index.js",
+  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.es.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
