@@ -23,7 +23,6 @@
     "build": "tsc && vite build",
     "prepare": "yarn build",
     "prebuild": "yarn test",
-    "postinstall": "yarn simple-git-hooks",
     "serve": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
