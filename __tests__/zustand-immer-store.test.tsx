@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { renderHook } from "@testing-library/react-hooks/dom";
 
-import { createStore } from "./zustand-immer-store";
+import { createStore } from "../src";
 
 const useCounterStore = createStore(
   { counter: 1, step: 1 },
