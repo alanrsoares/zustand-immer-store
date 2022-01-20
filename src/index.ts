@@ -2,7 +2,7 @@ import produce, { Draft } from "immer";
 import { WritableDraft } from "immer/dist/internal";
 import create, { GetState, State, StateCreator } from "zustand";
 
-export { default as shallow } from "zustand/shallow";
+import _shallow from "zustand/shallow";
 
 export type Selector<S, R = any> = (state: S) => R;
 export type Action<T = any> = (() => void) | ((payload: T) => void);
@@ -20,6 +20,8 @@ export type Store<
 };
 
 export type SetState<T extends State> = (set: (draft: WritableDraft<T>) => void) => void;
+
+export const shallow = _shallow;
 
 /**
  * Immer produce middleware for zustand stores
@@ -75,22 +77,34 @@ export function createStore<
     immerMiddleware((set, get) => ({
       state,
       actions: config?.createActions ? config.createActions(set, get) : ({} as TActions),
-      selectors: {
-        ...(config?.selectors ? config.selectors : ({} as TSelectors)),
-        ...createDefaultSelectors(state),
-      },
       get: get as GetState<Store<TState, TActions>>,
       set,
     }))
   );
 
-  type UseBoundStoreExtended = typeof useStore & {
-    selectors?: TSelectors;
+  const selectors = {
+    ...(config?.selectors ? config.selectors : ({} as TSelectors)),
+    ...createDefaultSelectors(state),
   };
 
-  (useStore as UseBoundStoreExtended).selectors = config?.selectors
-    ? config.selectors
-    : ({} as TSelectors);
+  type UseBoundStoreExtended = typeof useStore & {
+    selectors: TSelectors;
+    useSelector<S extends Selector<TState>>(selector: S): ReturnType<S>;
+    useSelector<K extends keyof typeof selectors>(selectorName: K): ReturnType<typeof selectors[K]>;
+  };
+
+  // inject selectors
+  (useStore as UseBoundStoreExtended).selectors = selectors;
+
+  // inject useSelector
+  (useStore as UseBoundStoreExtended).useSelector = function useSelector(selectorNameOrFn: any) {
+    const selector =
+      typeof selectorNameOrFn === "function"
+        ? (store: Store<TState>) => selectorNameOrFn(store.state)
+        : (store: Store<TState>) => selectors[selectorNameOrFn](store.state);
+
+    return useStore(selector, shallow);
+  };
 
   return useStore as UseBoundStoreExtended;
 }
