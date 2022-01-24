@@ -1,6 +1,7 @@
 import produce, { Draft } from "immer";
 import { WritableDraft } from "immer/dist/internal";
 import create, { GetState, State, StateCreator } from "zustand";
+import { persist, devtools } from "zustand/middleware";
 
 import _shallow from "zustand/shallow";
 
@@ -71,16 +72,43 @@ export function createStore<
       get: GetState<Store<TState, any>>
     ) => TActions;
     selectors?: TSelectors;
+    persist?: {
+      name: string;
+      version: number;
+    };
+    devtools?: {
+      name?: string;
+      anonymousActionType?: string;
+    };
   }
 ) {
-  const useStore = create<Store<TState, TActions>>(
-    immerMiddleware((set, get) => ({
-      state,
-      actions: config?.createActions ? config.createActions(set, get) : ({} as TActions),
-      get: get as GetState<Store<TState, TActions>>,
-      set,
-    }))
-  );
+  type TStore = Store<TState, TActions>;
+
+  /**
+   * State creator with applied immer middleware
+   */
+  const immerStateCreator = immerMiddleware<TStore>((set, get) => ({
+    state,
+    actions: config?.createActions ? config.createActions(set, get) : ({} as TActions),
+    get: get as GetState<TStore>,
+    set,
+  }));
+
+  /**
+   * State creator with applied devtools middleware
+   */
+  const devToolsStateCreator = config?.devtools
+    ? devtools(immerStateCreator, config.devtools)
+    : immerStateCreator;
+
+  /**
+   * State creator with applied persist middleware
+   */
+  const persistStateCreator = config?.persist
+    ? persist(devToolsStateCreator, config.persist)
+    : devToolsStateCreator;
+
+  const useStore = create<TStore>(persistStateCreator);
 
   const selectors = {
     ...(config?.selectors ? config.selectors : ({} as TSelectors)),
