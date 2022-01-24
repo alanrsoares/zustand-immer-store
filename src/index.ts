@@ -1,7 +1,7 @@
 import produce, { Draft } from "immer";
 import { WritableDraft } from "immer/dist/internal";
 import create, { GetState, State, StateCreator } from "zustand";
-import { persist, devtools, StateStorage } from "zustand/middleware";
+import { persist, devtools, StateStorage, PersistOptions } from "zustand/middleware";
 
 import _shallow from "zustand/shallow";
 
@@ -72,11 +72,7 @@ export function createStore<
       get: GetState<Store<TState, any>>
     ) => TActions;
     selectors?: TSelectors;
-    persist?: {
-      name: string;
-      version: number;
-      getStorage?: () => StateStorage;
-    };
+    persist?: PersistOptions<Store<TState, TActions>>;
     devtools?: {
       name?: string;
       anonymousActionType?: string;
@@ -86,14 +82,22 @@ export function createStore<
   type TStore = Store<TState, TActions>;
 
   /**
-   * State creator with applied immer middleware
+   * base state creator
+   * @param set
+   * @param get
+   * @returns
    */
-  const immerStateCreator = immerMiddleware<TStore>((set, get) => ({
+  const stateCreator = (set: SetState<TStore>, get: GetState<TStore>) => ({
     state,
     actions: config?.createActions ? config.createActions(set, get) : ({} as TActions),
     get: get as GetState<TStore>,
     set,
-  }));
+  });
+
+  /**
+   * State creator with applied immer middleware
+   */
+  const immerStateCreator = immerMiddleware(stateCreator);
 
   /**
    * State creator with applied devtools middleware
