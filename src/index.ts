@@ -1,7 +1,7 @@
 import produce, { Draft } from "immer";
 import { WritableDraft } from "immer/dist/internal";
 import create, { GetState, State, StateCreator } from "zustand";
-import { persist, devtools } from "zustand/middleware";
+import { persist, devtools, StateStorage } from "zustand/middleware";
 
 import _shallow from "zustand/shallow";
 
@@ -75,6 +75,7 @@ export function createStore<
     persist?: {
       name: string;
       version: number;
+      getStorage?: () => StateStorage;
     };
     devtools?: {
       name?: string;
