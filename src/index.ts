@@ -110,7 +110,10 @@ export function createStore<
    * State creator with applied persist middleware
    */
   const persistStateCreator = config?.persist
-    ? persist(devToolsStateCreator, config.persist)
+    ? persist(devToolsStateCreator, {
+        ...config.persist,
+        partialize: config.persist.partialize ?? ((store) => ({ state: store.state })),
+      })
     : devToolsStateCreator;
 
   const useStore = create<TStore>(persistStateCreator);
