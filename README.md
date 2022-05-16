@@ -1,6 +1,6 @@
 # Zustand Immer Store
 
-![npm](https://img.shields.io/npm/v/zustand-immer-store)
+[![npm](https://img.shields.io/npm/v/zustand-immer-store)](https://www.npmjs.com/package/zustand-immer-store)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/zustand-immer-store?style=flat)
 
 A ~268B library to create type-safe redux-style stores with [Zustand](https://github.com/pmndrs/zustand) and [Immer](https://github.com/immerjs/immer)
