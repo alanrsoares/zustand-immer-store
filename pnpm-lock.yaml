@@ -23,7 +23,7 @@ specifiers:
   typescript: 4.6.4
   vite: 2.9.9
   vitest: 0.12.6
-  zustand: ^3.6.9
+  zustand: ^3.7.2
 
 devDependencies:
   '@rollup/plugin-typescript': 8.3.2_typescript@4.6.4
@@ -48,7 +48,7 @@ devDependencies:
   typescript: 4.6.4
   vite: 2.9.9
   vitest: 0.12.6_c8@7.11.3+happy-dom@3.2.1
-  zustand: 3.6.9_react@17.0.2
+  zustand: 3.7.2_react@17.0.2
 
 packages:
 
@@ -2807,8 +2807,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand/3.6.9_react@17.0.2:
-    resolution: {integrity: sha512-OvDNu/jEWpRnEC7k8xh8GKjqYog7td6FZrLMuHs/IeI8WhrCwV+FngVuwMIFhp5kysZXr6emaeReMqjLGaldAQ==}
+  /zustand/3.7.2_react@17.0.2:
+    resolution: {integrity: sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       react: '>=16.8'
