@@ -45,9 +45,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.11",
     "happy-dom": "^8.1.1",
-    "immer": "^9.0.16",
+    "immer": "^9.0.19",
     "nano-staged": "0.8.0",
-    "prettier": "^2.8.1",
+    "prettier": "^2.8.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "simple-git-hooks": "2.8.0",
@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "immer": "^9.0.14",
-    "zustand": "^3.6.5"
+    "zustand": ">=3.6.5"
   },
   "nano-staged": {
     "*.{ts,tsx,md}": "prettier --write",

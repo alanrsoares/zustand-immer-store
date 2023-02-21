@@ -14,9 +14,9 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-react: ^7.31.11
   happy-dom: ^8.1.1
-  immer: ^9.0.16
+  immer: ^9.0.19
   nano-staged: 0.8.0
-  prettier: ^2.8.1
+  prettier: ^2.8.4
   react: ^17.0.2
   react-dom: ^17.0.2
   simple-git-hooks: 2.8.0
@@ -39,9 +39,9 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.30.0
   eslint-plugin-react: 7.31.11_eslint@8.30.0
   happy-dom: 8.1.1
-  immer: 9.0.16
+  immer: 9.0.19
   nano-staged: 0.8.0
-  prettier: 2.8.1
+  prettier: 2.8.4
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   simple-git-hooks: 2.8.0
@@ -1695,8 +1695,8 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /immer/9.0.16:
-    resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
+  /immer/9.0.19:
+    resolution: {integrity: sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ==}
     dev: true
 
   /import-fresh/3.3.0:
@@ -2205,8 +2205,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.8.1:
-    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
+  /prettier/2.8.4:
+    resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
